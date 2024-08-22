@@ -33,7 +33,7 @@ try:
     pipeline = InferencePipeline.init(
         model_id="living-room-items/1",  # Replace with your Roboflow model ID
         video_reference=1,  # 0 to use the built-in webcam
-        api_key="G0HdUVNRRR2g5eGLP20Z",  # Your Roboflow API key
+        api_key="",  # Your Roboflow API key
         on_prediction=custom_on_prediction,  # Use the custom function for predictions
     )
 
