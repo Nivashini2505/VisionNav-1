@@ -10,8 +10,8 @@ app = ctk.CTk()
 app.geometry("900x600")
 app.title("VisionNav Results")
 
-predictions_textbox = ctk.CTkLabel(master=app, text="VisionNav",font=("Arial", 16))
-predictions_textbox.place(x=100, y=80)
+predictions_textbox = ctk.CTkLabel(master=app, text="VisionNav",font=("Arial", 20))
+predictions_textbox.place(x=100, y=10)
 
 # Predictions display on the right side
 predictions_textbox = ctk.CTkTextbox(master=app, width=300, height=300)
@@ -24,13 +24,14 @@ start_button.place(x=50, y=60)
 # Custom function to handle predictions and print detected objects
 def custom_on_prediction(predictions, frame):
     try:
-        predictions_textbox.delete("1.0", ctk.END)  # Clear previous predictions
         for prediction in predictions['predictions']:
             object_class = prediction['class']
             confidence = prediction['confidence']
             # Insert predictions into the textbox
+            predictions_textbox.configure(state="normal")
             predictions_textbox.insert(ctk.END, f"Object: {object_class}, Confidence: {confidence:.2f}\n")
             predictions_textbox.see(ctk.END)  # Scroll to the end of the textbox
+            predictions_textbox.configure(state="disabled")  # Disable editing
             print(f"Object: {object_class}, Confidence: {confidence:.2f}")
         
         # Render the bounding boxes on the frame
