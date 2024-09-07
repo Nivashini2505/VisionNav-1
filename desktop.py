@@ -7,16 +7,19 @@ import numpy as np
 
 # Initialize the CustomTkinter app
 app = ctk.CTk()
-app.geometry("600x400")
-app.title("Object Recognition Results")
+app.geometry("900x600")
+app.title("VisionNav Results")
+
+predictions_textbox = ctk.CTkLabel(master=app, text="VisionNav",font=("Arial", 16))
+predictions_textbox.place(x=100, y=80)
 
 # Predictions display on the right side
 predictions_textbox = ctk.CTkTextbox(master=app, width=300, height=300)
-predictions_textbox.place(x=100, y=80)
+predictions_textbox.place(x=100, y=130)
 
 # Start detection button on the left
 start_button = ctk.CTkButton(master=app, text="Start Object Detection", width=200)
-start_button.place(x=50, y=20)
+start_button.place(x=50, y=60)
 
 # Custom function to handle predictions and print detected objects
 def custom_on_prediction(predictions, frame):
@@ -27,6 +30,7 @@ def custom_on_prediction(predictions, frame):
             confidence = prediction['confidence']
             # Insert predictions into the textbox
             predictions_textbox.insert(ctk.END, f"Object: {object_class}, Confidence: {confidence:.2f}\n")
+            predictions_textbox.see(ctk.END)  # Scroll to the end of the textbox
             print(f"Object: {object_class}, Confidence: {confidence:.2f}")
         
         # Render the bounding boxes on the frame
